@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 import colours from "../config/colours";
+import AppText from "../components/AppText";
 
 function WelcomeScreen(props) {
   return (
@@ -17,10 +18,10 @@ function WelcomeScreen(props) {
       blurRadius={3}
     >
       <View style={styles.loginButton}>
-        <Text style={styles.text}>Login</Text>
+        <AppText>Login</AppText>
       </View>
       <View style={styles.registerButton}>
-        <Text style={styles.text}>Register</Text>
+        <AppText>Register</AppText>
       </View>
     </ImageBackground>
   );
@@ -30,30 +31,25 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     justifyContent: "flex-end",
+    alignItems: "center",
   },
   loginButton: {
-    width: "100%",
+    width: "95%",
     height: 70,
-    padding: 2,
     margin: 5,
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colours.primary,
   },
   registerButton: {
-    width: "100%",
+    width: "95%",
     height: 70,
-    padding: 2,
     margin: 5,
+    borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colours.secondary,
-  },
-
-  text: {
-    fontSize: 32,
-    fontWeight: "400",
-    fontFamily: "Roboto",
+    backgroundColor: colours.tertiary,
   },
 });
 
