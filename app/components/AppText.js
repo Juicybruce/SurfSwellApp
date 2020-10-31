@@ -6,7 +6,6 @@ function AppText({ children }) {
 }
 const styles = StyleSheet.create({
   text: {
-    fontSize: 32,
     fontWeight: "400",
     fontFamily: Platform.OS === "android" ? "Roboto" : "Helvetica",
   },

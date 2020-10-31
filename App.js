@@ -1,18 +1,22 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import ListItem from "./app/components/ListItem";
+import LocationsScreen from "./app/screens/LocationsScreen";
 
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
-  return <WelcomeScreen />;
+  return (
+    <SafeAreaView style={styles.container}>
+      <LocationsScreen />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 30,
+    backgroundColor: "#000",
   },
 });
