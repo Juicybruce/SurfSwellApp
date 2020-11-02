@@ -1,5 +1,6 @@
-import React from "react";
-import { FlatList } from "react-native";
+import React, { useState } from "react";
+import Axios from "axios";
+import { Button, FlatList, View, StyleSheet, Text } from "react-native";
 
 import ListItem from "../components/ListItem";
 
@@ -24,7 +25,7 @@ const locationData = [
     id: 3,
     title: "South Arm",
     distance: "100km",
-    weather: "CLoudy",
+    weather: "",
     temp: "13",
     swell: "3.1m @ 13.7s SE",
   },
@@ -47,21 +48,67 @@ const locationData = [
 ];
 
 function LocationsScreen(props) {
+  const [weather, setWeather] = useState(locationData);
+
+  async function WeatherFetch() {
+    const apiKey = "d505558ba231a6042d34eea4ea623ad5";
+
+    const response = await Axios.get(
+      `http://api.openweathermap.org/data/2.5/weather?q=Hobart&appid=${apiKey}&units=metric`
+    );
+
+    // let foundIndex = weather.findIndex(
+    //   (weather) => weather.title == "South Arm"
+    // );
+    // let weatherData = [...weather];
+    // weatherData[foundIndex].weather = response.data.weather[0].description;
+
+    const whateverIWant = {
+      id: 5,
+      title: "Test Arm",
+      distance: "56",
+      weather: "Asteroids",
+      temp: "45degrees",
+      swell: "3.1m @ 13.7s SE",
+    };
+
+    setWeather(
+      weather.map((wea, index) => {
+        wea.title === "South Arm" ? whateverIWant : wea;
+      })
+    );
+  }
+
   return (
-    <FlatList
-      data={locationData}
-      keyExtractor={(data) => locationData.id}
-      renderItem={({ item }) => (
-        <ListItem
-          title={item.title}
-          distance={item.distance}
-          weather={item.weather}
-          temp={item.temp}
-          swell={item.swell}
-        />
-      )}
-    />
+    <View marginTop={100}>
+      <Button
+        style={styles.Button}
+        title={"Get Weather"}
+        onPress={WeatherFetch}
+      ></Button>
+      <FlatList
+        data={locationData}
+        keyExtractor={(data) => locationData.id}
+        renderItem={({ item }) => (
+          <ListItem
+            title={item.title}
+            distance={item.distance}
+            weather={item.weather}
+            temp={item.temp}
+            swell={item.swell}
+          />
+        )}
+      />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    width: "100%",
+    height: 100,
+    backgroundColor: "red",
+  },
+});
 
 export default LocationsScreen;

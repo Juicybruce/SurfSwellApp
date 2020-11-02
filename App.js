@@ -7,11 +7,7 @@ import LocationsScreen from "./app/screens/LocationsScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <LocationsScreen />
-    </SafeAreaView>
-  );
+  return <LocationsScreen />;
 }
 
 const styles = StyleSheet.create({
