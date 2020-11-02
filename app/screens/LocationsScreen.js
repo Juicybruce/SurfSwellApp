@@ -11,7 +11,7 @@ const locationData = [
     distance: "60km",
     weather: "Mostly Sunny",
     temp: "22",
-    swell: "41m @ 13.7s S",
+    wind: "41m @ 13.7s S",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const locationData = [
     distance: "40km",
     weather: "Sunny",
     temp: "26",
-    swell: "2.1m @ 13.7s WSW",
+    wind: "2.1m @ 13.7s WSW",
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const locationData = [
     distance: "100km",
     weather: "",
     temp: "13",
-    swell: "3.1m @ 13.7s SE",
+    wind: "3.1m @ 13.7s SE",
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const locationData = [
     distance: "200km",
     weather: "Storming",
     temp: "-4",
-    swell: "1.1m @ 13.7s NE",
+    wind: "1.1m @ 13.7s NE",
   },
   {
     id: 5,
@@ -43,7 +43,7 @@ const locationData = [
     distance: "100km",
     weather: "CLoudy",
     temp: "13",
-    swell: "3.1m @ 13.7s SE",
+    wind: "3.1m @ 13.7s SE",
   },
 ];
 
@@ -57,26 +57,17 @@ function LocationsScreen(props) {
       `http://api.openweathermap.org/data/2.5/weather?q=Hobart&appid=${apiKey}&units=metric`
     );
 
-    // let foundIndex = weather.findIndex(
-    //   (weather) => weather.title == "South Arm"
-    // );
-    // let weatherData = [...weather];
-    // weatherData[foundIndex].weather = response.data.weather[0].description;
-
-    const whateverIWant = {
-      id: 5,
-      title: "Test Arm",
-      distance: "56",
-      weather: "Asteroids",
-      temp: "45degrees",
-      swell: "3.1m @ 13.7s SE",
-    };
-
-    setWeather(
-      weather.map((wea, index) => {
-        wea.title === "South Arm" ? whateverIWant : wea;
-      })
+    let foundIndex = weather.findIndex(
+      (weather) => weather.title == "South Arm"
     );
+    let weatherData = [...weather];
+    weatherData[foundIndex].weather = response.data.weather[0].description;
+    weatherData[foundIndex].temp = response.data.main.temp;
+    weatherData[
+      foundIndex
+    ].wind = `${response.data.wind.speed}m/s @ ${response.data.wind.deg}`;
+
+    setWeather(weatherData);
   }
 
   return (
@@ -87,15 +78,15 @@ function LocationsScreen(props) {
         onPress={WeatherFetch}
       ></Button>
       <FlatList
-        data={locationData}
-        keyExtractor={(data) => locationData.id}
+        data={weather}
+        keyExtractor={(data) => weather.id}
         renderItem={({ item }) => (
           <ListItem
             title={item.title}
             distance={item.distance}
             weather={item.weather}
             temp={item.temp}
-            swell={item.swell}
+            wind={item.wind}
           />
         )}
       />

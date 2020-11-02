@@ -5,7 +5,7 @@ import AppText from "../components/AppText";
 
 import colours from "../config/colours";
 
-function ListItem({ title, distance, weather, temp, swell }) {
+function ListItem({ title, distance, weather, temp, wind }) {
   return (
     <View style={styles.container}>
       <View style={styles.topBox}>
@@ -15,7 +15,7 @@ function ListItem({ title, distance, weather, temp, swell }) {
       <View style={styles.bottomBox}>
         <AppText>{weather}</AppText>
         <AppText>{temp}</AppText>
-        <AppText>{swell}</AppText>
+        <AppText>{wind}</AppText>
       </View>
     </View>
   );
